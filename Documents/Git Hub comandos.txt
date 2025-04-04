@@ -1,0 +1,82 @@
+Configuración para Visual Studio Code para que los nuevos repositorios creados localmente usen "main" por defecto,
+git config --global init.defaultBranch main
+git checkout main  -  Asegurarse del cambio de configuración en local
+
+git init
+git add .
+git add nombreDelArchivo
+git config --global user.email "okcee@hotmail.com"
+git config --global user.name "okcee" 
+git status -s	ver el estado en el que se encuentran nuestros archivos
+git commit -m "descripcion"
+git checkout main
+git log --oneline	listado de todas las copias que tenemos en el repositorio
+git reset --hard	restaurar el archivo a la versión anterior
+git reset --hard 093f1c5	apuntar a un archivo en concreto
+
+- Para subir un proyecto a GitHub:
+    - Partiendo de que ya tenemos un repositorio creado en GitHub:
+git remote add origin "https://github.com/okcee/Python-okcee.git"
+git push -u origin main
+git push  -  Para subir un archivo usaremos git push
+git pull  -  para bajar un cambio desde nuestro repositorio a local usaremos git pull.
+
+    - Para cambiar el origen del remoto
+git remote -v  -  Mostrar los remotos configurados actualmente
+git remote set-url origin "https://github.com/okcee/Python-okcee.git"
+git push --set-upstream origin main
+
+- Tags
+git tag nombre -m "Descripción" 
+git push --tags
+
+- Clonar un repositorio
+git clone https://github.com/okcee/Python-okcee.git
+
+- Branchs (Ramas)
+git branch nombreRama	Crear rama
+git branch 		veremos las ramas del proyecto y en qué rama me encuentro
+git checkout nombreRama		cambiar de rama
+git Branch -d nombreRama	borra una rama
+
+- Merge (fusionar rama)
+git merge ramaAFusionar
+
+- Repositorios
+git remote show origin: Este comando te mostrará información sobre el repositorio remoto, incluyendo la rama principal.
+git branch -a: Este comando muestra todas las ramas, tanto las locales como las remotas. Esto te permite ver si el repositorio tiene una rama "main" o "master" remota.
+
+- Comandos de Ayuda
+git --help  (general)
+git help -a and git help -g  -  list available subcommands and some concept guides
+git help <command> or git help <concept>  -  to read about a specific subcommand or concept
+git help git  -  for an overview of the system
+
+- Pasos para cambiar de master a main, que implica modificar tanto la configuración local de tu repositorio como la configuración remota (en plataformas como GitHub, GitLab, etc.). Aquí te explico cómo hacerlo paso a paso:
+
+1. Configuración Local:
+Verificar la rama actual:
+Primero, asegúrate de que estás en la rama master: git checkout master
+Renombra la rama local master a main: git branch -m main
+Actualizar la rama principal predeterminada (opcional):
+Para que los nuevos repositorios creados localmente usen "main" por defecto, puedes ejecutar:
+git config --global init.defaultBranch main
+
+2. Configuración Remota (GitHub/GitLab/etc.):
+Enviar la rama main al repositorio remoto:
+git push -u origin main
+Cambiar la rama predeterminada en el repositorio remoto:
+Debes ir a la configuración de tu repositorio en la plataforma (GitHub, GitLab, etc.) y cambiar la rama predeterminada de master a main. 
+Los pasos generales son:
+Ve a la página de tu repositorio en la plataforma.
+Busca la sección de "Settings" o "Configuración".
+Busca la sección de "Branches" o "Ramas".
+Cambia la rama predeterminada a main.
+Actualizar las referencias remotas:
+git pull origin main --allow-unrelated-histories  -  Para forzar la combinación de los historiales no relacionados
+Una vez que hayas cambiado la rama predeterminada de forma remota, puedes eliminar la rama master remota, una vez que no la necesites más.
+git push origin --delete master
+Actualizar referencias locales:
+Para asegurarte de que tu repositorio local está sincronizado y reconoce los cambios remotos, puedes realizar lo siguiente:
+git remote prune origin
+git fetch --all

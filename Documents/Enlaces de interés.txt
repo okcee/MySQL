@@ -1,0 +1,31 @@
+Tutoriales, ejemplos y referencias
+https://www.w3schools.com/python/default.asp
+
+Cheatograpy - Referencias rápidas (https://cheatography.com/)
+https://cheatography.com/torerohk/cheat-sheets/python-3-espanol/
+
+Udemy -> Curso gratis de Visual Studio Code: Mejora tu velocidad para codificar -> Fernando Herrera
+https://www.udemy.com/share/101smO3@31Z7e526dI8HEfCohGmxd3rTY5cj7oCqrP20gDNprZ5cJOL-p502d-HG4iKR4qCnuA==/
+
+Udemy -> Curso gratis de Aprende las bases del versionamiento de código con Git -> Juan Ortiz
+https://www.udemy.com/share/10cwq33@8T-71eJTHtOjJ1J2-dGqLW9zYXA3NLNm723bLMkeA5RUkt6NISXuPzfnFb_ADwNluA==/
+
+Udemy -> Curso gratis de +30 Ejercicios Resueltos en Python -> Wilmer Planchez
+https://www.udemy.com/share/106JtG3@-jUhtILe6fd6LYX-WVA_MtmsWT1g5dZD0G1dVZRn9PaFNbr6VmqWNnqh1jpGrDyE1A==/
+
+NotebookLM es un asistente de investigación y escritura basado en IA que funciona mejor con las fuentes que subes
+https://notebooklm.google.com/?original_referer=https:%2F%2Fnotebooklm.google%23&pli=1
+
+Dillinger - Markdown Editor
+https://dillinger.io/
+
+Inteligencia Artificial
+https://gemini.google.com/app
+https://chat.qwenlm.ai/
+
+Prompts: dominar el arte de formular solicitudes, instrucciones efectivas para modelos de lenguaje de IA
+https://skills.yourlearning.ibm.com/activity/MDL-298
+
+Mejore la redacción de su currículum con IA generativa
+https://skills.yourlearning.ibm.com/activity/ILB-XVZNEXKGDVQN2PD3
+

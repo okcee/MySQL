@@ -1,0 +1,947 @@
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage{fancyhdr}           % For header and footer
+\usepackage{multicol}           % Allows multicols in tables
+\usepackage{tabularx}           % Intelligent column widths
+\usepackage{tabulary}           % Used in header and footer
+\usepackage{hhline}             % Border under tables
+\usepackage{graphicx}           % For images
+\usepackage{xcolor}             % For hex colours
+%\usepackage[utf8x]{inputenc}    % For unicode character support
+\usepackage[T1]{fontenc}        % Without this we get weird character replacements
+\usepackage{colortbl}           % For coloured tables
+\usepackage{setspace}           % For line height
+\usepackage{lastpage}           % Needed for total page number
+\usepackage{seqsplit}           % Splits long words.
+%\usepackage{opensans}          % Can't make this work so far. Shame. Would be lovely.
+\usepackage[normalem]{ulem}     % For underlining links
+% Most of the following are not required for the majority
+% of cheat sheets but are needed for some symbol support.
+\usepackage{amsmath}            % Symbols
+\usepackage{MnSymbol}           % Symbols
+\usepackage{wasysym}            % Symbols
+%\usepackage[english,german,french,spanish,italian]{babel}              % Languages
+
+% Document Info
+\author{Ismael Mercado (torerohk)}
+\pdfinfo{
+  /Title (python-3-espanol.pdf)
+  /Creator (Cheatography)
+  /Author (Ismael Mercado (torerohk))
+  /Subject (Python 3 Español Cheat Sheet)
+}
+
+% Lengths and widths
+\addtolength{\textwidth}{6cm}
+\addtolength{\textheight}{-1cm}
+\addtolength{\hoffset}{-3cm}
+\addtolength{\voffset}{-2cm}
+\setlength{\tabcolsep}{0.2cm} % Space between columns
+\setlength{\headsep}{-12pt} % Reduce space between header and content
+\setlength{\headheight}{85pt} % If less, LaTeX automatically increases it
+\renewcommand{\footrulewidth}{0pt} % Remove footer line
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\renewcommand{\seqinsert}{\ifmmode\allowbreak\else\-\fi} % Hyphens in seqsplit
+% This two commands together give roughly
+% the right line height in the tables
+\renewcommand{\arraystretch}{1.3}
+\onehalfspacing
+
+% Commands
+\newcommand{\SetRowColor}[1]{\noalign{\gdef\RowColorName{#1}}\rowcolor{\RowColorName}} % Shortcut for row colour
+\newcommand{\mymulticolumn}[3]{\multicolumn{#1}{>{\columncolor{\RowColorName}}#2}{#3}} % For coloured multi-cols
+\newcolumntype{x}[1]{>{\raggedright}p{#1}} % New column types for ragged-right paragraph columns
+\newcommand{\tn}{\tabularnewline} % Required as custom column type in use
+
+% Font and Colours
+\definecolor{HeadBackground}{HTML}{333333}
+\definecolor{FootBackground}{HTML}{666666}
+\definecolor{TextColor}{HTML}{333333}
+\definecolor{DarkBackground}{HTML}{162542}
+\definecolor{LightBackground}{HTML}{F7F8F9}
+\renewcommand{\familydefault}{\sfdefault}
+\color{TextColor}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhead{} % Set header to blank
+\fancyfoot{} % Set footer to blank
+\fancyhead[L]{
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{C}
+    \SetRowColor{DarkBackground}
+    \vspace{-7pt}
+    {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\noindent
+        \hspace*{-6pt}\includegraphics[width=5.8cm]{/web/www.cheatography.com/public/images/cheatography_logo.pdf}}
+    }
+\end{tabulary}
+\columnbreak
+\begin{tabulary}{11cm}{L}
+    \vspace{-2pt}\large{\bf{\textcolor{DarkBackground}{\textrm{Python 3 Español Cheat Sheet}}}} \\
+    \normalsize{by \textcolor{DarkBackground}{Ismael Mercado (torerohk)} via \textcolor{DarkBackground}{\uline{cheatography.com/23626/cs/5397/}}}
+\end{tabulary}
+\end{multicols}}
+
+\fancyfoot[L]{ \footnotesize
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{LL}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{2}{p{5.377cm}}{\bf\textcolor{white}{Cheatographer}}  \\
+  \vspace{-2pt}Ismael Mercado (torerohk) \\
+  \uline{cheatography.com/torerohk} \\
+  \end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Cheat Sheet}}  \\
+   \vspace{-2pt}Published 12th November, 2015.\\
+   Updated 11th May, 2016.\\
+   Page {\thepage} of \pageref{LastPage}.
+\end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Sponsor}}  \\
+  \SetRowColor{white}
+  \vspace{-5pt}
+  %\includegraphics[width=48px,height=48px]{dave.jpeg}
+  Measure your website readability!\\
+  www.readability-score.com
+\end{tabulary}
+\end{multicols}}
+
+
+
+
+\begin{document}
+\raggedright
+\raggedcolumns
+
+% Set font size to small. Switch to any value
+% from this page to resize cheat sheet text:
+% www.emerson.emory.edu/services/latex/latex_169.html
+\footnotesize % Small font.
+
+\begin{multicols*}{2}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{print()}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{print()} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{print al ser funcion siempre se utiliza con parentesis}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Variable String}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{y = "a" \newline z = 'Hola' \newline  \newline multilinea = """cadena de texto \newline con mas de una linea"""} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{variables de tipo string van entre comillas dobles o sencillas \newline para cadenas de texto de multiples lineas se utiliza """ texto """}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{5.68 cm} p{2.32 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Operadores Matematicos}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+suma & `a+b` \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+resta & `a-b` \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+multiplicacion & `a*b` \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+division\_real & `a/b` \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+division\_entera & `a//b` \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+resto & `a\%b` \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+potencia & `a**b` \tn 
+% Row Count 7 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{8.4cm}}{los operadores matemáticos principales pueden utilizarse combinados respetando la jerarquía al resolverlas \newline 1. Resolver ( )  {[} {]}  \{ \} \newline 2. Resolver exponentes. \newline 3. Resolver * y / de izquierda a derecha \newline 4. Resolver  + y - de izquierda a derecha}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{6.48 cm} p{1.52 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Operadores Logicos}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Igual a & `==` \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+Diferente a & `!=` \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+Menor que & `\textless{}` \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+Menor o igual que & `\textless{}=` \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+Mayor que & `\textgreater{}` \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+Mayor o igual que & `\textgreater{}=` \tn 
+% Row Count 6 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{8.4cm}}{Devolverán un valor boleano}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Metodos para Strings}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{{\bf{len()}} retorna longitud de caracteres en string: \newline % Row Count 2 (+ 2)
+`len(string)` \newline % Row Count 3 (+ 1)
+{\bf{lower()}} retorna string en minúsculas: \newline % Row Count 4 (+ 1)
+`string.lower()` \newline % Row Count 5 (+ 1)
+{\bf{upper()}} retorna string en mayúsculas: \newline % Row Count 6 (+ 1)
+`string.upper()` \newline % Row Count 7 (+ 1)
+{\bf{capitalize()}} retorna primer carácter de string en mayúsculas \newline % Row Count 9 (+ 2)
+`string.capitalize()` \newline % Row Count 10 (+ 1)
+{\bf{str()}} retorna conversión explícita de strings: \newline % Row Count 12 (+ 2)
+`str(string)`% Row Count 13 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{Literales \newline `variable.lower()` \newline `variable.upper()` \newline No Literales \newline `len(variable)` \newline `str(variable)`}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{String Inmutable a Flexible}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{print("\%s" \% (variable)) o print("\%s" \% ("string")) \newline  \newline nom= "Ismael" \newline ape = "Mercado" \newline  \newline \# variables \newline print ("mi nombre \%s. mi apellido \%s ." \% (nom, ape)) \newline  \newline \# strings \newline print ("mi nombre \%s. mi apellido \%s ." \% ("Ismael", "Mercado"))} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{p{2.088 cm} x{2.304 cm} p{2.088 cm} p{0.72 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{4}{x{8.4cm}}{\bf\textcolor{white}{Comparadores guia}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+ & {\bf{AND}} &  &  \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+True & True & True &  \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+True & False & False &  \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+False & True & False &  \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+False & False & False &  \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+ & {\bf{OR}} &  &  \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+True & True & True &  \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+True & False & True &  \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+False & True & True &  \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+False & False & False &  \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+ & {\bf{NOT}} &  &  \tn 
+% Row Count 11 (+ 1)
+% Row 11
+\SetRowColor{white}
+True &  & False &  \tn 
+% Row Count 12 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+False &  & True &  \tn 
+% Row Count 13 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}----}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Diccionarios}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Estructura de datos que almacena valores utilizando otros como referencia para su acceso y almacenamiento, es iterable, mutable y puede contener elementos de diferente tipo; se declara entre llaves {\emph{\{clave:valor\}}} \newline % Row Count 5 (+ 5)
+`diccionario=\{'a':1, 'b':2, 'c':3\}` \newline % Row Count 6 (+ 1)
+Podemos utilizar la funcion {\bf{dict()}} \newline % Row Count 7 (+ 1)
+`diccionario=dict(a=1, b=2, c=3)` \newline % Row Count 8 (+ 1)
+Acceder a un elemento utilizamos el indice \newline % Row Count 9 (+ 1)
+`diccionario{[}'c'{]}` \newline % Row Count 10 (+ 1)
+Modificar un valor \newline % Row Count 11 (+ 1)
+`diccionario{[}'b'{]}=28` \newline % Row Count 12 (+ 1)
+Nuevos elementos añadimos una clave no existente \newline % Row Count 13 (+ 1)
+`diccionario{[}'d'{]}=4` \newline % Row Count 14 (+ 1)
+Iterar con un diccionario \newline % Row Count 15 (+ 1)
+{\bf{items()}} {\emph{Acceso a claves y valores}} \newline % Row Count 16 (+ 1)
+`diccionario.items()` \newline % Row Count 17 (+ 1)
+{\bf{values()}} {\emph{Acceso a valores}} \newline % Row Count 18 (+ 1)
+`diccionario.values()` \newline % Row Count 19 (+ 1)
+{\bf{keys()}} {\emph{Acceso a claves}} \newline % Row Count 20 (+ 1)
+`diccionario.keys()` \newline % Row Count 21 (+ 1)
+Ordenar un diccionario \newline % Row Count 22 (+ 1)
+`sorted(diccionario)` \newline % Row Count 23 (+ 1)
+Ordenar un diccionario en inverso \newline % Row Count 24 (+ 1)
+`sorted(diccionario, reverse=True)`% Row Count 25 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Matrices}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Anidando listas construimos matrices de elementos \newline % Row Count 1 (+ 1)
+`matriz={[}{[}1,2,3{]},{[}4,5,6{]}{]}` \newline % Row Count 2 (+ 1)
+para acceder a los elementos utilizamos \newline % Row Count 3 (+ 1)
+`matriz{[}0{]}{[}1{]}` \newline % Row Count 4 (+ 1)
+sustituir un elemento \newline % Row Count 5 (+ 1)
+`matriz{[}1{]}{[}0{]}=33`% Row Count 6 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{crear, modificar y leer archivos en disco}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Función para crear un archivo \newline % Row Count 1 (+ 1)
+`def crearArchivo():` \newline % Row Count 2 (+ 1)
+\seqsplit{`   archivo=open('datos}.txt', 'w')` \newline % Row Count 3 (+ 1)
+\seqsplit{`    archivo.close()`} \newline % Row Count 4 (+ 1)
+Función para escribir en un archivo \newline % Row Count 5 (+ 1)
+`def escribirArchivo():` \newline % Row Count 6 (+ 1)
+\seqsplit{`    archivo=open('datos}.txt', 'a')` \newline % Row Count 7 (+ 1)
+\seqsplit{`    archivo.write('prueba} de texto\textbackslash{}n')` \newline % Row Count 8 (+ 1)
+`    archivo.close` \newline % Row Count 9 (+ 1)
+Función para leer un archivo \newline % Row Count 10 (+ 1)
+`def leerArchivo():` \newline % Row Count 11 (+ 1)
+\seqsplit{`    archivo=open('datos}.txt', 'r')` \newline % Row Count 12 (+ 1)
+`    linea = archivo.readline()` \newline % Row Count 13 (+ 1)
+`    while linea!="":` \newline % Row Count 14 (+ 1)
+\seqsplit{`        print(linea)`} \newline % Row Count 15 (+ 1)
+\seqsplit{`        linea=archivo}.readline()` \newline % Row Count 16 (+ 1)
+\seqsplit{`    archivo.close()`}% Row Count 17 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{1.064 cm} x{3.268 cm} x{3.268 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{3}{x{8.4cm}}{\bf\textcolor{white}{Modos de apertura de archivos}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+{\bf{Indicador}} & {\bf{Modo de apertura}} & {\bf{Ubicación del puntero}} \tn 
+% Row Count 3 (+ 3)
+% Row 1
+\SetRowColor{white}
+``r` & Solo lectura & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 5 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+`rb` & Solo lectura en modo binario & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 7 (+ 2)
+% Row 3
+\SetRowColor{white}
+`r+` & Lectura y escritura & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 9 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+`rb+` & Lectura y escritura en modo binario & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 12 (+ 3)
+% Row 5
+\SetRowColor{white}
+`w` & Solo escritura. Sobreescribe el archivo si existe. Crea el archivo si no existe & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 17 (+ 5)
+% Row 6
+\SetRowColor{LightBackground}
+`wb` & Solo escritura en modo binario. Sobreescribe el archivo si existe. Crea el archivo si no existe & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 23 (+ 6)
+% Row 7
+\SetRowColor{white}
+`w+` & Escritura y lectura. Sobreescribe el archivo si existe. Crea el archivo si no existe & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 28 (+ 5)
+% Row 8
+\SetRowColor{LightBackground}
+`wb+` & Escritura y lectura en modo binario. Sobreescribe el archivo si existe. Crea el archivo si no existe & \textasciicircum{}Al inicio del archivo\textasciicircum{} \tn 
+% Row Count 34 (+ 6)
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\vfill
+\columnbreak
+\begin{tabularx}{8.4cm}{x{1.064 cm} x{3.268 cm} x{3.268 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{3}{x{8.4cm}}{\bf\textcolor{white}{Modos de apertura de archivos (cont)}}  \tn
+% Row 9
+\SetRowColor{LightBackground}
+`a` & Añadido (agregar contenido). Crea el archivo si éste no existe & \textasciicircum{}Si archivo existe, al final. Si no, al comienzo\textasciicircum{} \tn 
+% Row Count 4 (+ 4)
+% Row 10
+\SetRowColor{white}
+`ab` & Añadido en modo binario (agregar contenido). Crea el archivo si éste no existe & \textasciicircum{}Si archivo existe, al final. Si no, al comienzo\textasciicircum{} \tn 
+% Row Count 9 (+ 5)
+% Row 11
+\SetRowColor{LightBackground}
+`a+` & Añadido (agregar contenido) y lectura. Crea el archivo si éste no existe. & \textasciicircum{}Si archivo existe, al final. Si no, al comienzo\textasciicircum{} \tn 
+% Row Count 14 (+ 5)
+% Row 12
+\SetRowColor{white}
+`ab+` & Añadido (agregar contenido) y lectura en modo binario. Crea el archivo si éste no existe & \textasciicircum{}Si archivo existe, al final. Si no, al comienzo\textasciicircum{} \tn 
+% Row Count 20 (+ 6)
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\SetRowColor{LightBackground}
+\mymulticolumn{3}{x{8.4cm}}{indicado a la función open() como una string en su segundo parámetro.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{2.736 cm} x{2.356 cm} x{2.508 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{3}{x{8.4cm}}{\bf\textcolor{white}{Funciones integradas}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\seqsplit{`\_\_import\_\_()`} & `abs()` & `all()` \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+`any()` & `ascii()` & `bin()` \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+`bool()` & \seqsplit{`bytearray()`} & `bytes()` \tn 
+% Row Count 4 (+ 2)
+% Row 3
+\SetRowColor{white}
+`callable()` & `chr()` & \seqsplit{`classmethod()`} \tn 
+% Row Count 6 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+`compile()` & `complex()` & `delattr()` \tn 
+% Row Count 7 (+ 1)
+% Row 5
+\SetRowColor{white}
+`dict()` & `dir()` & `divmod()` \tn 
+% Row Count 8 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+`enumerate()` & `eval()` & `exec()` \tn 
+% Row Count 9 (+ 1)
+% Row 7
+\SetRowColor{white}
+`filter()` & `float()` & `format()` \tn 
+% Row Count 10 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+`frozenset()` & `getattr()` & `globals()` \tn 
+% Row Count 11 (+ 1)
+% Row 9
+\SetRowColor{white}
+`hasattr()` & `hash()` & `help()` \tn 
+% Row Count 12 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+`hex()` & `id()` & `input()` \tn 
+% Row Count 13 (+ 1)
+% Row 11
+\SetRowColor{white}
+`int()` & \seqsplit{`isinstance()`} & \seqsplit{`issubclass()`} \tn 
+% Row Count 15 (+ 2)
+% Row 12
+\SetRowColor{LightBackground}
+`iter()` & `len()` & `list()` \tn 
+% Row Count 16 (+ 1)
+% Row 13
+\SetRowColor{white}
+`locals()` & `map()` & `max()` \tn 
+% Row Count 17 (+ 1)
+% Row 14
+\SetRowColor{LightBackground}
+\seqsplit{`memoryview()`} & `min()` & `next()` \tn 
+% Row Count 18 (+ 1)
+% Row 15
+\SetRowColor{white}
+`object()` & `oct()` & `open()` \tn 
+% Row Count 19 (+ 1)
+% Row 16
+\SetRowColor{LightBackground}
+`ord()` & `pow()` & `print()` \tn 
+% Row Count 20 (+ 1)
+% Row 17
+\SetRowColor{white}
+`property()` & `range()` & `repr()` \tn 
+% Row Count 21 (+ 1)
+% Row 18
+\SetRowColor{LightBackground}
+`reversed()` & `round()` & `set()` \tn 
+% Row Count 22 (+ 1)
+% Row 19
+\SetRowColor{white}
+`setattr()` & `slice()` & `sorted()` \tn 
+% Row Count 23 (+ 1)
+% Row 20
+\SetRowColor{LightBackground}
+\seqsplit{`staticmethod()`} & `str()` & `sum()` \tn 
+% Row Count 25 (+ 2)
+% Row 21
+\SetRowColor{white}
+`super()` & `tuple()` & `type()` \tn 
+% Row Count 26 (+ 1)
+% Row 22
+\SetRowColor{LightBackground}
+`vars()` & `zip()` &  \tn 
+% Row Count 27 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\SetRowColor{LightBackground}
+\mymulticolumn{3}{x{8.4cm}}{Python incluye las siguientes funciones y siempre están disponibles}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{type()}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{x = 3.1415 \newline print(type(x)) \newline  \newline \textgreater{}\textgreater{}\textless{}class 'float'\textgreater{}} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{La función type permite comprobar el tipo de variable}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Variables Numericas}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{num\_entero = 5 \newline num\_negativo = -7 \newline num\_real = 3.14 \newline num\_complejo = 3.2 + 7j \newline num\_binario = 0b111 \newline num\_octal = 0o10 \newline num\_hex = 0xff} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{puedes crear variables del tipo Enteros, Reales, Complejos y los puedes representar en Decimal, Binario, Octal y Hexadecimal}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Conjunto Matematico funcion set()}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{conjunto = set('246') \newline conjunto2 = \{2, 4, 6\}} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{se pueden utilizar los métodos {\emph{add()}} y {\emph{remove()}} para añadir o eliminar elementos. \newline si se crea un conjunto con valores repetidos, estos se eliminan automáticamente.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{1.2 cm} x{6.8 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Operadores Comparadores}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+{\bf{and}} & compara 2 elementos y devuelve True si ambos son verdaderos \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+{\bf{or}} & compara 2 elementos y devuelve True si uno de ellos es verdadero \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+{\bf{not}} & devuelve el valor opuesto de un boleano \tn 
+% Row Count 6 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{8.4cm}}{primero se calcula {\emph{not}} \newline después se calcula {\emph{and}} \newline por último se calcula {\emph{or}}}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{1.6 cm} x{6.4 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Definiciones}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\seqsplit{Iteración} & Término general para la toma de cada elemento de algo, una después de la otra. Usar un bucle, explícita o implícita, al pasar sobre un grupo de elementos \tn 
+% Row Count 5 (+ 5)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Metodos Especiales para Strings}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{{\bf{find()}} Retorna el indice del primer carácter que coincide con el buscado \newline % Row Count 2 (+ 2)
+`cad = "ABC"` \newline % Row Count 3 (+ 1)
+`cad.find("B")` \newline % Row Count 4 (+ 1)
+`\textgreater{}\textgreater{}1` \newline % Row Count 5 (+ 1)
+{\bf{replace()}} reemplaza un carácter por otro \newline % Row Count 6 (+ 1)
+`cad.replace("B", "Z")` \newline % Row Count 7 (+ 1)
+`\textgreater{}\textgreater{}AZC` \newline % Row Count 8 (+ 1)
+{\bf{split()}} divide una cadena basado en un caracter y retorna una lista \newline % Row Count 10 (+ 2)
+`cad.split(";")` \newline % Row Count 11 (+ 1)
+{\bf{join()}} retorna una cadena donde los valores son separados por un caracter \newline % Row Count 13 (+ 2)
+`lista = {[}"Hola", "Mundo"{]}` \newline % Row Count 14 (+ 1)
+`print ("+".join(lista,))` \newline % Row Count 15 (+ 1)
+`lista2 = "Hola"` \newline % Row Count 16 (+ 1)
+`print ("-".join(lista2))` \newline % Row Count 17 (+ 1)
+{\bf{strip()}}, {\bf{lstrip()}}, {\bf{rstrip()}} eliminan los espacios en blanco, a la izquierda y a la derecha respectivamente \newline % Row Count 20 (+ 3)
+`cad.strip()` \newline % Row Count 21 (+ 1)
+`cad.lstrip()` \newline % Row Count 22 (+ 1)
+`cad.rstrip()`% Row Count 23 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{3.344 cm} p{1.52 cm} x{2.736 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{3}{x{8.4cm}}{\bf\textcolor{white}{Tabla Basica}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+Tupla & `( )` & Inmutable \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+Lista & `{[} {]}` & Mutable \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+Diccionario & `\{ \}` & Mutable \tn 
+% Row Count 3 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Tupla}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Arreglo de objetos definido entre paréntesis es inmutable puede contener diferentes tipos de objetos. \newline % Row Count 3 (+ 3)
+`tupla = (1, 'a', 3.5)` \newline % Row Count 4 (+ 1)
+Se puede anidar una tupla dentro de otra \newline % Row Count 5 (+ 1)
+`tupla2 = (1, (4, 'B'), 3.5)` \newline % Row Count 6 (+ 1)
+Se puede acceder a los valores a través del indice. \newline % Row Count 8 (+ 2)
+`tupla{[}1{]}`% Row Count 9 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Lista}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Arreglo de objetos definido entre corchetes es mutable puede contener diferentes tipos de objetos. \newline % Row Count 2 (+ 2)
+`lista = {[}2, 'B', 4.5{]}` \newline % Row Count 3 (+ 1)
+Se puede acceder a los valores a través del indice y reemplazarlos. \newline % Row Count 5 (+ 2)
+`lista{[}1{]} = 'A'` \newline % Row Count 6 (+ 1)
+Podemos comprobar si un valor existe en una lista usando {\bf{in}}. \newline % Row Count 8 (+ 2)
+`'B' in lista` \newline % Row Count 9 (+ 1)
+se insertan valores al final de la lista con {\bf{.append()}} \newline % Row Count 11 (+ 2)
+`lista.append('nuevo')` \newline % Row Count 12 (+ 1)
+insertar en una posición definida se utiliza el indice y {\bf{.insert()}} \newline % Row Count 14 (+ 2)
+`lista.insert(2, 'C')` \newline % Row Count 15 (+ 1)
+borrar un elemento usamos {\bf{del()}} \newline % Row Count 16 (+ 1)
+`del(lista{[}1{]})` \newline % Row Count 17 (+ 1)
+ordenar sin alterar {\bf{sorted()}} y para orden inverso argumento {\bf{reverse}} \newline % Row Count 19 (+ 2)
+`sorted(lista)` \newline % Row Count 20 (+ 1)
+`sorted(lista, reverse=True)` \newline % Row Count 21 (+ 1)
+ordenar con criterio como argumento \newline % Row Count 22 (+ 1)
+`sorted(lista, key=str.lower)` \newline % Row Count 23 (+ 1)
+ordenar alterando usamos {\bf{sort()}} \newline % Row Count 24 (+ 1)
+`lista.sort()`% Row Count 25 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Comprensión de Listas y Diccionarios}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Compresión Lista \newline % Row Count 1 (+ 1)
+`lista= {[}x for x in (1,2,3){]}` \newline % Row Count 2 (+ 1)
+Compresión Diccionario \newline % Row Count 3 (+ 1)
+`diccionario= \{k: k+1 for k in (1,2,3)\}`% Row Count 4 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{La comprensión es una construcción sintáctica de python, permite declarar una lista o diccionario a través de la creación de otra.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{For y While}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{El bucle {\bf{while}} (mientras) ejecuta un fragmento de código mientras se cumpla una condición. \newline % Row Count 2 (+ 2)
+`edad = 0` \newline % Row Count 3 (+ 1)
+`while edad \textless{} 18:` \newline % Row Count 4 (+ 1)
+`    edad = edad + 1` \newline % Row Count 5 (+ 1)
+`    print "Felicidades, tienes " + str(edad)`% Row Count 7 (+ 2)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{Permiten ejecutar un mismo fragmento de código un cierto número de veces, mientras se cumpla una determinada condición.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{If, Else y Elif}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{Evalúan la condición indicada y ejecutan una instrucción u otra \newline % Row Count 2 (+ 2)
+`if condicion1:` \newline % Row Count 3 (+ 1)
+{\emph{si condicion1 es True realiza esto}} \newline % Row Count 4 (+ 1)
+`elif condicion2:` \newline % Row Count 5 (+ 1)
+{\emph{si condicion2 es True realiza esto}} \newline % Row Count 6 (+ 1)
+`else:` \newline % Row Count 7 (+ 1)
+{\emph{si ambas condiciones son False realiza esto}} \newline % Row Count 8 (+ 1)
+se pueden anidar \newline % Row Count 9 (+ 1)
+`if condicion1:` \newline % Row Count 10 (+ 1)
+{\emph{si condicion1 es True realiza esto}} \newline % Row Count 11 (+ 1)
+`    if condicion3:` \newline % Row Count 12 (+ 1)
+{\emph{    si condicion3 es True realiza esto}} \newline % Row Count 13 (+ 1)
+`    else:` \newline % Row Count 14 (+ 1)
+{\emph{    si es False realiza esto}} \newline % Row Count 15 (+ 1)
+`else:` \newline % Row Count 16 (+ 1)
+{\emph{en caso contrario realiza esto}}% Row Count 17 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{8.4cm}}{\bf\textcolor{white}{Clases, Objetos, Propiedades y Metodos}}  \tn
+\SetRowColor{white}
+\mymulticolumn{1}{x{8.4cm}}{*Clases \newline % Row Count 1 (+ 1)
+ *Objetos \newline % Row Count 2 (+ 1)
+  *Propiedades \newline % Row Count 3 (+ 1)
+   *Métodos \newline % Row Count 4 (+ 1)
+`class Clase():` \# La clase \newline % Row Count 5 (+ 1)
+`    varClase=0` \# Variables de Clase \newline % Row Count 6 (+ 1)
+`    def \_\_init\_\_(self):` \# Método de Instancia (constructor) \newline % Row Count 8 (+ 2)
+\seqsplit{`        self.varInstancia=0`} \# Variable de Instancia \newline % Row Count 10 (+ 2)
+`objeto=Clase()` \newline % Row Count 11 (+ 1)
+\seqsplit{`objeto.metodoinstancia()`} \newline % Row Count 12 (+ 1)
+`@classmethod` \# Decorador Metodo de Clase \newline % Row Count 13 (+ 1)
+`    def clsmet(cls):` \# Obligatorio (cls) \newline % Row Count 14 (+ 1)
+`Clase.clsmet`% Row Count 15 (+ 1)
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{8.4cm}}{{\bf{Self}} hace referencia a si mismo \newline {\bf{\_\_init\_\_}} constructor para inicializar los objetos a un valor \newline al colocar {\emph{(clase)}} se habilita la hereda los objetos de la clase Persona}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{2.356 cm} x{2.66 cm} x{2.584 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{3}{x{8.4cm}}{\bf\textcolor{white}{Palabras reservadas}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+`and` & `as` & `assert` \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+`break` & `class` & `continue` \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+`def` & `del` & `elif` \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+`else` & `except` & `False` \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+`finally` & `for` & `from` \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+`global` & `if` & `import` \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+`in` & `is` & `lambda` \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+`None` & `nonlocal` & `not` \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+`or` & `pass` & `raise` \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+`return` & `True` & `try` \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+`while` & `with` & `yield` \tn 
+% Row Count 11 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\SetRowColor{LightBackground}
+\mymulticolumn{3}{x{8.4cm}}{Estas palabras no pueden utilizarse para nombrar variables.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}---}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{8.4cm}{x{2.32 cm} x{5.68 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{8.4cm}}{\bf\textcolor{white}{Patrones caracteres}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+`\textbackslash{}n` & Nueva Linea \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+`\textbackslash{}r` & Retorno de carro \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+`\textbackslash{}t` & Tabulador Horizontal \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+`\textbackslash{}w` & Caracter minuscula \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+`\textbackslash{}W` & Caracter Mayuscula \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+`\textbackslash{}s` & Engloba minusculas y mayusculas \tn 
+% Row Count 7 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+`\textbackslash{}S` & cualquier caracter que no es espacio en blanco \tn 
+% Row Count 9 (+ 2)
+% Row 7
+\SetRowColor{white}
+`\textbackslash{}d` & numero entre 0 - 9 \tn 
+% Row Count 10 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+`\textbackslash{}D` & cualquier carácter que no es un numero \tn 
+% Row Count 12 (+ 2)
+% Row 9
+\SetRowColor{white}
+`\textasciicircum{}` & Inicio de cadena \tn 
+% Row Count 13 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+`\$` & Fin de cadena \tn 
+% Row Count 14 (+ 1)
+% Row 11
+\SetRowColor{white}
+`\textbackslash{}` & Escape caracter especial \tn 
+% Row Count 15 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+`{[}{]}` & rango de caracteres dentro de corchetes \tn 
+% Row Count 17 (+ 2)
+% Row 13
+\SetRowColor{white}
+`\textasciicircum{}{[}{]}` & cualquier caracter fuera de corchetes \tn 
+% Row Count 19 (+ 2)
+% Row 14
+\SetRowColor{LightBackground}
+`\textbackslash{}b` & separacion entre numero y/o letra \tn 
+% Row Count 21 (+ 2)
+% Row 15
+\SetRowColor{white}
+\{\{Metacaracter\}\} & repeticiones \tn 
+% Row Count 23 (+ 2)
+% Row 16
+\SetRowColor{LightBackground}
+`+` & una o mas veces \tn 
+% Row Count 24 (+ 1)
+% Row 17
+\SetRowColor{white}
+`*` & cero o mas veces \tn 
+% Row Count 25 (+ 1)
+% Row 18
+\SetRowColor{LightBackground}
+`?` & cero o una vez \tn 
+% Row Count 26 (+ 1)
+% Row 19
+\SetRowColor{white}
+`\{n\}` & n numero de veces \tn 
+% Row Count 27 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+
+% That's all folks
+\end{multicols*}
+
+\end{document}

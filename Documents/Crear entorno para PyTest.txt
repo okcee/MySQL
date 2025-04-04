@@ -1,0 +1,19 @@
+
+Iniciamos la terminal en el directorio raíz que deseemos crear el entorno virtual
+
+- Creamos el entorno.
+python -m venv env
+py -m venv env
+
+- Activamos el entorno.
+source env/scripts/activate
+
+- Comando actualizar pip
+python -m pip install --upgrade pip
+
+- Instalación de pytets.
+pip install pytest
+
+- Ver la lista de paquetes instalados en tu entorno virtual.
+pip list
+
