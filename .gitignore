@@ -398,3 +398,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# .config.ini de DataBase
+*.config.ini
+*.env
