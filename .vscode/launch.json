@@ -51,6 +51,15 @@
             "python": "${workspaceFolder}/VirtENV/bin/python" // (Ajusta la ruta si es diferente)
         },
         {
+            "name": "Python: ZonaFIT - Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/ZonaFIT", // Directorio de trabajo para ZonaFIT
+            "python": "${workspaceFolder}/VirtENV/bin/python" // (Ajusta la ruta si es diferente)
+        },
+        {
             "name": "Python: Current File (General - File Dir)",
             "type": "python",
             "request": "launch",

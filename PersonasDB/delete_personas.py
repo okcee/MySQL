@@ -1,4 +1,4 @@
-# Consulta todos los registros de una base de datos MySQL
+# Elimina o borra un registro existente de una base de datos MySQL
 
 '''Paso1: Importar módulos'''
 import mysql.connector
@@ -27,19 +27,15 @@ try:
     '''Paso6: Crear un Cursor'''
     cursor = conexion.cursor()
 
-    '''Paso7: Ejecutar la Consulta SELECT'''
-    query = "SELECT * FROM personas"
+    '''Paso7: Ejecutar la Sentencia DELETE'''
+    query = "DELETE FROM personas WHERE id=%s"
+    valores = (7,)
 
     # Ejecutar la consulta
-    cursor.execute(query)
+    cursor.execute(query, valores)
+    conexion.commit() # guarda los cambios en la base de datos
     # Obtener todos los resultados
-    resultados = cursor.fetchall()
-    # También puedes obtener los nombres de las columnas (opcional)
-    nombres_columnas = [column[0] for column in cursor.description]
-    print("\nNombres de las columnas:", nombres_columnas)
-    # Imprimir los resultados
-    for fila in resultados:
-        print(fila)
+    print(f'Se ha eliminado la información del registro en la base de datos del ID: {valores}')
 
 # Paso8: Capturar excepciones
 except Exception as e:

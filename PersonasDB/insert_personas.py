@@ -1,3 +1,5 @@
+# Inserta o añade un nuevo registro a una base de datos MySQL
+
 '''Paso1: Importar módulos'''
 import mysql.connector
 import configparser
