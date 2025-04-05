@@ -23,10 +23,9 @@
 ZonaFIT/
 ├── App_Zona_Fit.py
 ├── Cliente_DAO
-|   ├── Conexion
-|   ├── Cliente
-├── docs/               #
+├── Cliente.py
+├── Conexion.py
+├── docs/
 ├── LICENSE
 ├── README.md
-
 └── ...
