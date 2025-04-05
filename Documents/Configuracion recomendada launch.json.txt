@@ -50,7 +50,6 @@ Ejemplo de launch.json con configuraciones específicas por proyecto (opcional):
 Si necesitas configuraciones más específicas, podrías tener algo como esto:
 
 JSON
-
 {
     "version": "0.2.0",
     "configurations": [

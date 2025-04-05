@@ -1,0 +1,33 @@
+Soluciones para que el botón "Run Python File in Terminal" funcione:
+
+1. Asegúrate de que el Intérprete Sea Correcto: Verifica el intérprete de Python seleccionado en la barra de estado (parte inferior de VS Code). Si no es el intérprete de tu entorno virtual, cámbialo.  
+
+2. Configurar el Comportamiento del Botón (a través de settings.json): Puedes personalizar el comportamiento del comando asociado a este botón modificando la configuración de VS Code. Busca la configuración relacionada con la ejecución de Python en la terminal.
+- Ve a "Archivo" > "Preferencias" > "Configuración" (o Ctrl+,).
+- Busca python.terminal.executeInFileDir. Por defecto, esta configuración suele estar en true, lo que hace que el script se ejecute con el directorio del archivo como directorio de trabajo.
+Puedes intentar establecer python.terminal.executeInFileDir a false. Esto podría hacer que se utilice el directorio de trabajo de la terminal activa (si tienes tu entorno virtual activado en una terminal en VS Code). Sin embargo, este comportamiento puede ser inconsistente.
+
+3. Crear una Tarea Personalizada: Una solución más robusta es crear una tarea personalizada en tasks.json que ejecute tu script con el directorio de trabajo deseado y luego asociar esa tarea a un atajo de teclado (si lo deseas) o ejecutarla desde el menú "Tareas".
+
+Ejemplo de tasks.json (crea este archivo en la carpeta .vscode si no existe):
+```JSON
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Python File (Workspace Root)",
+            "type": "shell",
+            "command": "${command:python.pythonPath} ${file}",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
+```
+Luego, puedes ejecutar esta tarea desde el menú "Tareas" > "Ejecutar tarea..." y seleccionar "Run Python File (Workspace Root)".
+
