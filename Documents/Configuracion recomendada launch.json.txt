@@ -1,0 +1,88 @@
+Configuración Recomendada para launch.json:
+
+Te propongo la siguiente configuración en tu launch.json. Esta configuración asume que quieres ejecutar y depurar el archivo actualmente abierto en el editor, y que el directorio de trabajo debe ser la carpeta donde se encuentra ese archivo.
+
+JSON
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}", // Establece el directorio del archivo como directorio de trabajo
+            "python": "${command:python.interpreterPath}" // Utiliza el intérprete de Python seleccionado en VS Code
+        },
+        {
+            "name": "Python: Current File (Debugger)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}", // Establece el directorio del archivo como directorio de trabajo
+            "python": "${command:python.interpreterPath}" // Utiliza el intérprete de Python seleccionado en VS Code
+        }
+    ]
+}
+Explicación de los cambios y por qué son importantes:
+
+"cwd": "${fileDirname}": Esta línea es crucial. Establece el directorio de trabajo actual (current working directory) para la ejecución del script como la carpeta que contiene el archivo que estás ejecutando (${file}). Esto es importante si tu script necesita acceder a otros archivos o módulos que se encuentran en la misma carpeta o en rutas relativas a ella.
+"python": "${command:python.interpreterPath}": Esta línea asegura que se utilice el intérprete de Python que has seleccionado actualmente en VS Code. Esto es fundamental si estás utilizando un entorno virtual (VirtENV) y quieres que tu script se ejecute con las librerías instaladas en ese entorno. Asegúrate de tener el intérprete correcto seleccionado en la barra de estado de VS Code (la parte inferior).
+Cómo utilizar esta configuración:
+
+Reemplaza el contenido de tu archivo .vscode/launch.json con el código anterior.
+Guarda el archivo.
+Abre el archivo Python que quieres ejecutar (por ejemplo, @select_personas.py).
+Para ejecutar sin depurar (RUN): Puedes usar el botón "Run Python File" que aparece en la esquina superior derecha del editor cuando tienes un archivo Python abierto, o puedes ir al menú "Ejecutar" > "Ejecutar sin depurar" (Ctrl+Alt+N o Cmd+Option+N). La primera configuración ("Python: Current File") se utilizará de forma predeterminada para la ejecución simple.
+Para depurar (DEBUGGER): Ve al menú "Ejecutar" > "Iniciar depuración" (F5). Se te preguntará qué configuración quieres usar. Selecciona "Python: Current File (Debugger)". También puedes crear puntos de interrupción en tu código antes de iniciar la depuración.
+Consideraciones Adicionales:
+
+Entorno Virtual (VirtENV): Si tus proyectos (PersonasDB, Logistica) utilizan el entorno virtual VirtENV, asegúrate de que el intérprete de Python seleccionado en VS Code sea el intérprete que se encuentra dentro de tu entorno virtual (VirtENV/bin/python en Linux/macOS o VirtENV\Scripts\python.exe en Windows). Puedes verificar y cambiar el intérprete en la barra de estado de VS Code.
+Múltiples Proyectos: Si trabajas con frecuencia en diferentes proyectos dentro de tu workspace y cada uno tiene su propio entorno o necesita un directorio de trabajo específico, podrías considerar tener múltiples configuraciones en tu launch.json. Por ejemplo, podrías tener una configuración específica para los scripts dentro de PersonasDB y otra para los de Logistica, cada una con su propio "cwd" y, si es necesario, una ruta específica al intérprete de su entorno virtual.
+Ejemplo de launch.json con configuraciones específicas por proyecto (opcional):
+
+Si necesitas configuraciones más específicas, podrías tener algo como esto:
+
+JSON
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: PersonasDB - Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/PersonasDB", // Directorio de trabajo para PersonasDB
+            "python": "${workspaceFolder}/VirtENV/bin/python" // (Ajusta la ruta si es diferente)
+        },
+        {
+            "name": "Python: Logistica - Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/Logistica", // Directorio de trabajo para Logistica
+            "python": "${workspaceFolder}/VirtENV/bin/python" // (Ajusta la ruta si es diferente)
+        },
+        {
+            "name": "Python: Current File (General)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}", // Directorio de trabajo basado en la ubicación del archivo
+            "python": "${command:python.interpreterPath}" // Intérprete seleccionado en VS Code
+        }
+    ]
+}
+Con esta configuración más avanzada, tendrías varias opciones al iniciar la depuración o ejecución, permitiéndote elegir la configuración más adecuada para el proyecto en el que estás trabajando.
+
+Prueba la primera configuración recomendada (con "cwd": "${fileDirname}") y asegúrate de tener el intérprete de Python correcto seleccionado. Esto debería solucionar tu problema de ejecución con el botón "Run" y también permitirá que el depurador funcione correctamente. Si sigues teniendo problemas, proporciona más detalles sobre el error específico que recibes.
