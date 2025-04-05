@@ -8,7 +8,6 @@ config = configparser.ConfigParser()
 conexion = None  # Initialize conexion to None
 cursor = None  # Initialize cursor to None
 
-
 try:
     '''Paso3: Leer el archivo de configuración'''
     config.read('.config.ini')
@@ -21,26 +20,24 @@ try:
         "database": config['database']['database']
     }
 
-
     '''Paso5: Establecer la Conexión'''
     conexion = mysql.connector.connect(**db_config)
     '''Paso6: Crear un Cursor'''
     cursor = conexion.cursor()
 
     '''Paso7: Ejecutar la Consulta SELECT'''
-    query = "SELECT * FROM personas"  # Reemplaza "tu_tabla" con el nombre de tu tabla
+    query = "SELECT * FROM personas"
 
     # Ejecutar la consulta
     cursor.execute(query)
     # Obtener todos los resultados
     resultados = cursor.fetchall()
-    # Imprimir los resultados
-    for fila in resultados:
-        print(fila)
-
     # También puedes obtener los nombres de las columnas (opcional)
     nombres_columnas = [column[0] for column in cursor.description]
     print("\nNombres de las columnas:", nombres_columnas)
+    # Imprimir los resultados
+    for fila in resultados:
+        print(fila)
 
 # Paso8: Capturar excepciones
 except Exception as e:
