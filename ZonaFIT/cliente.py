@@ -1,3 +1,6 @@
+import sys  # Importa el módulo 'sys' para acceder a funcionalidades del sistema, como la ruta de búsqueda de módulos.
+import os  # Importa el módulo 'os' para interactuar con el sistema operativo, como la manipulación de rutas de archivos.
+
 '''Clase cliente, también conocida como clase modelo o clase de dominio'''
 
 class Cliente:

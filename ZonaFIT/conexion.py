@@ -1,5 +1,6 @@
 import configparser
 import mysql.connector
+import sys
 import os
 
 from mysql.connector import pooling
