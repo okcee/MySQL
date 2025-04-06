@@ -31,3 +31,13 @@ Ejemplo de tasks.json (crea este archivo en la carpeta .vscode si no existe):
 ```
 Luego, puedes ejecutar esta tarea desde el menú "Tareas" > "Ejecutar tarea..." y seleccionar "Run Python File (Workspace Root)".
 
+
+Importancia de las importaciones en los scripts de python
+
+import sys  # Importa el módulo 'sys' para acceder a funcionalidades del sistema, como la ruta de búsqueda de módulos.
+import os  # Importa el módulo 'os' para interactuar con el sistema operativo, como la manipulación de rutas de archivos.
+
+# Añadir el directorio padre (directorio raíz del proyecto) a la ruta de Python.
+current_dir = os.path.dirname(os.path.abspath(__file__))  # Obtiene la ruta absoluta del directorio donde se encuentra el archivo actual (cliente_dao.py).
+parent_dir = os.path.dirname(current_dir)  # Obtiene la ruta del directorio padre del directorio actual (el directorio que contiene a ZonaFIT).
+sys.path.append(parent_dir)  # Añade la ruta del directorio padre a la lista de rutas de búsqueda de módulos de Python (sys.path).
