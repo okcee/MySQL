@@ -21,10 +21,10 @@
 
 # Estructura del Proyecto:
 ZonaFIT/
-├── App_Zona_Fit.py
-├── Cliente_DAO
-├── Cliente.py
-├── Conexion.py
+├── app_zona_fit.py
+├── cliente_dao
+├── cliente.py
+├── conexion.py
 ├── docs/
 ├── LICENSE
 ├── README.md
