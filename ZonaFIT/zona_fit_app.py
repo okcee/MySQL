@@ -2,13 +2,13 @@
 import sys  # Importa el módulo 'sys' para acceder a funcionalidades del sistema, como la ruta de búsqueda de módulos.
 import os  # Importa el módulo 'os' para interactuar con el sistema operativo, como la manipulación de rutas de archivos.
 
-from ZonaFIT.cliente import Cliente
-from ZonaFIT.cliente_dao import clienteDAO
+from cliente import Cliente
+from cliente_dao import clienteDAO
 
 print('**** Clientes Zona Fit (GIM) ****')
 opcion = None
 while opcion != 5:
-    print(f"""Menu:
+    print(f"""\nMenu:
         1. Listar clientes
         2. Agregar cliente
         3. Actualizar cliente
@@ -17,8 +17,8 @@ while opcion != 5:
     opcion = int(input('Ingrese una opción: '))
     if opcion == 1: # Listar clientes
         clientes = clienteDAO.seleccionar()
+        print('\n*** Listado de clientes ***')
         for cliente in clientes:
-            print('\n*** Listado de clientes ***')
             print(cliente)
     elif opcion == 2: # Agregar cliente
         nombre_var = input('Ingrese el nombre del cliente: ')
