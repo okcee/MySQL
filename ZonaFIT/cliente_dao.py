@@ -38,7 +38,78 @@ class clienteDAO:  # Define la clase 'clienteDAO' que implementa el patrón DAO 
                 cursor.close()  # Cierra el cursor.
                 Conexion.liberar_conexion(conexion)  # Libera la conexión a la base de datos utilizando el método 'liberar_conexion' de la clase 'Conexion'.
 
+    @classmethod
+    def insertar(cls, cliente):
+        conexion = None # Inicializa la variable 'conexion' a 'None' para almacenar la conexión a la base de datos.
+        try: # Inicia un bloque 'try' para manejar posibles excepciones.
+            conexion = Conexion.obtener_conexion() # Obtiene una conexión a la base de datos utilizando el método 'obtener_conexion' de la clase 'Conexion'.
+            cursor = conexion.cursor() # Crea un objeto cursor para ejecutar consultas SQL.
+            valores = (cliente.nombre, cliente.apellido, cliente.membresia) # Especifica los valores para hacer el INSERT, tomando los valores del objeto cliente
+            cursor.execute(cls.INSERTAR, valores) # Ejecuta la consulta SQL definida en el atributo constante 'INSERTAR'.
+            conexion.commit() # Confirma la subida los cambios en la base de datos.
+            return cursor.rowcount # Está variable indica cuatos datos se modificaron en la base de datos
+        except Exception as e:
+            print(f'Ocurrió un error al insertar el cliente: {e}')
+        finally:  # Bloque 'finally' que se ejecuta siempre, haya o no excepciones.
+            if conexion is not None:  # Verifica si la variable 'conexion' tiene una conexión.
+                cursor.close()  # Cierra el cursor.
+                Conexion.liberar_conexion(conexion)  # Libera la conexión a la base de datos utilizando el método 'liberar_conexion' de la clase 'Conexion'.
+    
+    @classmethod
+    def actualizar(cls, cliente): # Aquí el objeto cliente, a diferencia de los anteriores, debería de tener valor de id
+        conexion = None
+        try: # Inicia un bloque 'try' para manejar posibles excepciones.
+            conexion = Conexion.obtener_conexion() # Obtiene una conexión a la base de datos utilizando el método 'obtener_conexion' de la clase 'Conexion'.
+            cursor = conexion.cursor() # Crea un objeto cursor para ejecutar consultas SQL.
+            valores = (cliente.nombre, cliente.apellido, cliente.membresia, cliente.id) # Especifica los valores para hacer el UPDATE, tomando los valores del objeto cliente
+            cursor.execute(cls.ACTUALIZAR, valores) # Ejecuta la consulta SQL definida en el atributo constante 'ACTUALIZAR'.
+            conexion.commit() # Confirma la subida los cambios en la base de datos.
+            return cursor.rowcount # Está variable indica cuatos datos se modificaron en la base de datos
+        except Exception as e:
+            print(f'Ocurrió un error al insertar el cliente: {e}')
+        finally:  # Bloque 'finally' que se ejecuta siempre, haya o no excepciones.
+            if conexion is not None:  # Verifica si la variable 'conexion' tiene una conexión.
+                cursor.close()  # Cierra el cursor.
+                Conexion.liberar_conexion(conexion)  # Libera la conexión a la base de datos utilizando el método 'liberar_conexion' de la clase 'Conexion'.
+    
+    @classmethod
+    def eliminar(cls, cliente): # basta con el valor de id para eliminar el registro de tipo cliente
+        conexion = None
+        try: # Inicia un bloque 'try' para manejar posibles excepciones.
+            conexion = Conexion.obtener_conexion() # Obtiene una conexión a la base de datos utilizando el método 'obtener_conexion' de la clase 'Conexion'.
+            cursor = conexion.cursor() # Crea un objeto cursor para ejecutar consultas SQL.
+            valores = (cliente.id,) # Especifica el valor de "ID" para ejecutar la sentencia delete, tomando los valores del objeto cliente (como valores es una tupla, añadimos la "," después del primer valor para especificar que es una tupla con solo un dato)
+            cursor.execute(cls.ELIMINAR, valores) # Ejecuta la consulta SQL definida en el atributo constante 'ELIMINAR'.
+            conexion.commit() # Confirma la subida del cambio en la base de datos.
+            return cursor.rowcount # Está variable indica cuatos datos se modificaron en la base de datos
+        except Exception as e:
+            print(f'Ocurrió un error al insertar el cliente: {e}')
+        finally:  # Bloque 'finally' que se ejecuta siempre, haya o no excepciones.
+            if conexion is not None:  # Verifica si la variable 'conexion' tiene una conexión.
+                cursor.close()  # Cierra el cursor.
+                Conexion.liberar_conexion(conexion)  # Libera la conexión a la base de datos utilizando el método 'liberar_conexion' de la clase 'Conexion'.
+
+
+# TESTING FILE
 if __name__ == '__main__':  # Verifica si el script se está ejecutando directamente (no importado como módulo).
+    
+    # Insertar cliente
+    # cliente1 = Cliente(nombre='Alejandra', apellido='Tellez', membresia='300')
+    # clientes_insertados = clienteDAO.insertar(cliente1)
+    # print(f'Clientes insertados: {clientes_insertados}')
+    
+    # Actualizar cliente
+    # cliente_actualizar = Cliente (3, 'Alexa', 'Tellez', '400')
+    # clientes_actualizados = clienteDAO.actualizar(cliente_actualizar)
+    # print(f'Clientes actualizados: {clientes_actualizados}')
+    
+    # Eliminar cliente
+    # cliente_eliminar = Cliente(id=3)
+    # clientes_eliminados = clienteDAO.eliminar(cliente_eliminar)
+    # print(f'Clientes eliminados: {clientes_eliminados}')
+    
+    # Seleccionar los clientes
     clientes = clienteDAO.seleccionar()  # Llama al método 'seleccionar' de la clase 'clienteDAO' para obtener todos los clientes.
     for cliente in clientes:  # Itera sobre la lista de clientes obtenida.
         print(cliente)  # Imprime la información de cada cliente (utilizando el método '__str__' de la clase 'Cliente').
+    
