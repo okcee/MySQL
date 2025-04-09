@@ -11,7 +11,7 @@ import os  # Importa el módulo 'os' para interactuar con el sistema operativo, 
 from conexion import Conexion  # Importa la clase 'Conexion' desde el módulo 'conexion.py' (ahora accesible gracias a la modificación de sys.path).
 from cliente import Cliente  # Importa la clase 'Cliente' desde el módulo 'cliente.py' (ahora accesible gracias a la modificación de sys.path).
 
-class clienteDAO:  # Define la clase 'clienteDAO' que implementa el patrón DAO para la entidad 'cliente'.
+class ClienteDAO:  # Define la clase 'clienteDAO' que implementa el patrón DAO para la entidad 'cliente'.
     SELECCIONAR = 'SELECT * FROM cliente ORDER BY id'  # Define una constante con la consulta SQL para seleccionar todos los registros de la tabla 'cliente' ordenados por 'id'.
     INSERTAR = 'INSERT INTO cliente (nombre, apellido, membresia) VALUES (%s, %s, %s)'  # Define una constante con la consulta SQL para insertar un nuevo registro en la tabla 'cliente'.
     ACTUALIZAR = 'UPDATE cliente SET nombre=%s, apellido=%s, membresia=%s WHERE id=%s'  # Define una constante con la consulta SQL para actualizar un registro existente en la tabla 'cliente'.
@@ -109,7 +109,7 @@ if __name__ == '__main__':  # Verifica si el script se está ejecutando directam
     # print(f'Clientes eliminados: {clientes_eliminados}')
     
     # Seleccionar los clientes
-    clientes = clienteDAO.seleccionar()  # Llama al método 'seleccionar' de la clase 'clienteDAO' para obtener todos los clientes.
+    clientes = ClienteDAO.seleccionar()  # Llama al método 'seleccionar' de la clase 'clienteDAO' para obtener todos los clientes.
     for cliente in clientes:  # Itera sobre la lista de clientes obtenida.
         print(cliente)  # Imprime la información de cada cliente (utilizando el método '__str__' de la clase 'Cliente').
     
