@@ -24,8 +24,9 @@
                     <form action="/guardar" method="post" autocomplete="off">
                         <!-- Nombre -->
                         <div class="form-floating py-2">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>
-                            <label for="nombre">Nombre</label>
+                            {% comment %} <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>
+                            <label for="nombre">Nombre</label> {% endcomment %}
+                            {{forma.nombre}}
                         </div>
                         <!-- Apellido -->
                         <div class="form-floating py-2">
