@@ -27,7 +27,8 @@
                         <div class="form-floating py-2">
                             {% comment %} <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>
                             <label for="nombre">Nombre</label> {% endcomment %}
-                            {{forma.nombre}}
+                            {{forma.nombre("class=form-control", placeholder="Nombre")}}
+                            {{forma.nombre.label}}
                         </div>
                         <!-- Apellido -->
                         <div class="form-floating py-2">
