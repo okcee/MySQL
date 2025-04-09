@@ -22,29 +22,27 @@
                 <div class="border rounded-3 p-2">
                     <!-- # Espacio para el formulario -->
                     <form action="/guardar" method="post" autocomplete="off">
-                        {{forma.crsf_token}}
+                        {{ forma.csrf_token }}
                         <!-- Nombre -->
                         <div class="form-floating py-2">
-                            {% comment %} <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>
-                            <label for="nombre">Nombre</label> {% endcomment %}
-                            {{forma.nombre("class=form-control", placeholder="Nombre")}}
-                            {{forma.nombre.label}}
+                            <!-- <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>  -->
+                            <!-- <label for="nombre">Nombre</label> -->
+                            {{ forma.nombre(class="form-control", placeholder="Nombre") }}
+                            {{ forma.nombre.label }} {# Opcional: puedes añadir class="form-label" si Bootstrap lo necesita #}
                         </div>
                         <!-- Apellido -->
                         <div class="form-floating py-2">
-                            <input type="text" class="form-control" id="apellido" placeholder="Apellido"/>
-                            <label for="apellido">Apellido</label>
+                            {{ forma.apellido(class="form-control", placeholder="Apellido") }}
+                            {{ forma.apellido.label }}
                         </div>
                         <!-- Membresía -->
                         <div class="form-floating py-2">
-                            <input type="number" class="form-control" id="membresia" placeholder="Membresía"/>
-                            <label for="membresia">Membresía</label>
+                            {{ forma.membresia(class="form-control", placeholder="Membresía") }}
+                            {{ forma.membresia.label }} {# Opcional: puedes añadir class="form-label" si Bootstrap lo necesita #}
                         </div>
                         <!-- Botones -->
                         <div class="text-center py-2">
-                            <button type="submit" class="btn btn-warning btn-sm me-3">
-                                Guardar
-                            </button>
+                            {{ forma.guardar(class="btn btn-warning btn-sm me-3") }}
                             <input type="reset" class="btn btn-danger btn-sm" value="Limpiar"/>
                         </div>
                     </form>

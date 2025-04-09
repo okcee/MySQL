@@ -42,6 +42,7 @@ def inicio():
     return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=cliente_forma)
 
 # --- NUEVA RUTA PARA GUARDAR ---
+'''
 @app.route('/guardar', methods=['POST'])
 def guardar():
     app.logger.debug(f'Entrando a /guardar con método {request.method}')
@@ -72,6 +73,7 @@ def guardar():
         # clientes_db = ClienteDAO.seleccionar()
         # return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=forma)
         return redirect(url_for('inicio')) # Redirección simple por ahora
+'''
 # --- FIN NUEVA RUTA ---
 
 if __name__ == '__main__':
