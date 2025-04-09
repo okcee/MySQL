@@ -13,6 +13,7 @@ from cliente import Cliente  # Importa la clase 'Cliente' desde el módulo 'clie
 
 class ClienteDAO:  # Define la clase 'clienteDAO' que implementa el patrón DAO para la entidad 'cliente'.
     SELECCIONAR = 'SELECT * FROM cliente ORDER BY id'  # Define una constante con la consulta SQL para seleccionar todos los registros de la tabla 'cliente' ordenados por 'id'.
+    SELECCIONAR_ID = 'SELECT * FROM cliente WHERE id=%s'  # Define una constante con la consulta SQL para seleccionar un registro de la tabla 'cliente' por su 'id'. Se crea un método para recuperar un cliente por id  y usarlo en el método Editar de la app.
     INSERTAR = 'INSERT INTO cliente (nombre, apellido, membresia) VALUES (%s, %s, %s)'  # Define una constante con la consulta SQL para insertar un nuevo registro en la tabla 'cliente'.
     ACTUALIZAR = 'UPDATE cliente SET nombre=%s, apellido=%s, membresia=%s WHERE id=%s'  # Define una constante con la consulta SQL para actualizar un registro existente en la tabla 'cliente'.
     ELIMINAR = 'DELETE FROM cliente WHERE id=%s'  # Define una constante con la consulta SQL para eliminar un registro de la tabla 'cliente' por su 'id'.
@@ -37,7 +38,26 @@ class ClienteDAO:  # Define la clase 'clienteDAO' que implementa el patrón DAO 
             if conexion is not None:  # Verifica si la variable 'conexion' tiene una conexión.
                 cursor.close()  # Cierra el cursor.
                 Conexion.liberar_conexion(conexion)  # Libera la conexión a la base de datos utilizando el método 'liberar_conexion' de la clase 'Conexion'.
-
+    
+    @classmethod  # Define un método de clase, que se puede llamar directamente en la clase sin necesidad de instanciar un objeto.
+    def seleccionar_por_id(cls, id):  # Define el método 'seleccionar_por_id' para obtener los datos de un cliente de la base de datos por su id.
+        conexion = None  # Inicializa la variable 'conexion' a 'None' para almacenar la conexión a la base de datos.
+        try:  # Inicia un bloque 'try' para manejar posibles excepciones.
+            conexion = Conexion.obtener_conexion()  # Obtiene una conexión a la base de datos utilizando el método 'obtener_conexion' de la clase 'Conexion'.
+            cursor = conexion.cursor()  # Crea un objeto cursor para ejecutar consultas SQL.
+            valores = (id,) # Define la tupla (con solo un parámetro(id)) de valores con el parámetro que estamos recibiendo del método.
+            cursor.execute(cls.SELECCIONAR_ID, valores)  # Ejecuta la consulta SQL definida en la constante 'SELECCIONAR_ID'.
+            registro = cursor.fetchone()  # Obtiene un registro resultante de la consulta y lo almacena en 'registros'.
+            # Mapeo de clase-tabla cliente
+            cliente = Cliente(registro[0], registro[1], registro[2], registro[3])  # Crea un objeto 'Cliente' con los datos del registro.
+            return cliente  # Retorna la lista de objetos 'Cliente'.
+        except Exception as e:  # Captura cualquier excepción que ocurra dentro del bloque 'try'.
+            print(f'Ocurrió un error al seleccionar un cliente por id: {e}')  # Imprime un mensaje de error con la excepción capturada.
+        finally:  # Bloque 'finally' que se ejecuta siempre, haya o no excepciones.
+            if conexion is not None:  # Verifica si la variable 'conexion' tiene una conexión.
+                cursor.close()  # Cierra el cursor.
+                Conexion.liberar_conexion(conexion)  # Libera la conexión a la base de datos utilizando el método 'liberar_conexion' de la clase 'Conexion'.
+    
     @classmethod
     def insertar(cls, cliente):
         conexion = None # Inicializa la variable 'conexion' a 'None' para almacenar la conexión a la base de datos.

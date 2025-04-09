@@ -24,7 +24,6 @@ try:
     app.config['SECRET_KEY'] = config.get('FlaskSettings', 'SECRET_KEY')
 except Exception as e:
     raise RuntimeError(f"Error al leer SECRET_KEY desde .config.ini: {e}")
-
 # --- Fin de la carga de configuración  de datos sensibles ---
 
 titulo_app = 'Zona Fit (GYM)'
@@ -42,7 +41,6 @@ def inicio():
     return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=cliente_forma)
 
 # --- NUEVA RUTA PARA GUARDAR ---
-'''
 @app.route('/guardar', methods=['POST'])
 def guardar():
     app.logger.debug(f'Entrando a /guardar con método {request.method}')
@@ -73,8 +71,25 @@ def guardar():
         # clientes_db = ClienteDAO.seleccionar()
         # return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=forma)
         return redirect(url_for('inicio')) # Redirección simple por ahora
-'''
 # --- FIN NUEVA RUTA ---
+
+# --- INICIO RUTA LIMPIAR
+@app.route('/limpiar')
+def limpiar():
+    app.logger.debug(f'Entrando a /limpiar con método {request.method}')
+    return redirect(url_for('inicio'))
+# --- FIN RUTA LIMPIAR
+# --- INICIO RUTA MÉTODO EDITAR ---
+@app.route('/editar/<int:id>') # Procesa peticiones localhost:5000/editar/1 --> (nº id)
+def editar(id):
+    app.logger.debug(f'Entrando a /editar/{id} con método {request.method}')
+    cliente =  ClienteDAO.seleccionar_por_id(id)
+    cliente_forma = ClienteForma(obj=cliente)
+    # Recuperamos los datos con return, incluídos los clientes recuperados de la base de datos para volver a mostrarlo.
+    clientes_db = ClienteDAO.seleccionar()
+    return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=cliente_forma)
+# --- FIN RUTA MÉTODO EDITAR ---
+
 
 if __name__ == '__main__':
     app.run(debug=True)

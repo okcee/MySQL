@@ -25,9 +25,10 @@
                         {{ forma.csrf_token }}
                         <!-- Nombre -->
                         <div class="form-floating py-2">
+                            <!-- Ejemplo de texto estático -->
                             <!-- <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>  -->
                             <!-- <label for="nombre">Nombre</label> -->
-                            {{ forma.nombre(class="form-control", placeholder="Nombre") }}
+                            {{ forma.nombre(class="form-control", placeholder="Nombre") }} <!-- Texto de forma dinámica -->
                             {{ forma.nombre.label }} {# Opcional: puedes añadir class="form-label" si Bootstrap lo necesita #}
                         </div>
                         <!-- Apellido -->
@@ -43,7 +44,10 @@
                         <!-- Botones -->
                         <div class="text-center py-2">
                             {{ forma.guardar(class="btn btn-warning btn-sm me-3") }}
-                            <input type="reset" class="btn btn-danger btn-sm" value="Limpiar"/>
+                            <!--<input type="reset" class="btn btn-danger btn-sm" value="Limpiar"/>-->
+                            <a href="/limpiar" class="btn btn-danger btn-sm">
+                            Limpiar
+                            </a>
                         </div>
                     </form>
                 </div> <!-- Cierre del Contenedor del formulario -->
