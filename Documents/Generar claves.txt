@@ -1,0 +1,1 @@
+Importante: Reemplaza 'tu_clave_secreta_muy_larga_y_aleatoria_aqui' con una clave real, larga y difícil de adivinar. Puedes generar una usando python -c 'import secrets; print(secrets.token_hex(16))' en tu terminal

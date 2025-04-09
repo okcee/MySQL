@@ -22,6 +22,7 @@
                 <div class="border rounded-3 p-2">
                     <!-- # Espacio para el formulario -->
                     <form action="/guardar" method="post" autocomplete="off">
+                        {{forma.crsf_token}}
                         <!-- Nombre -->
                         <div class="form-floating py-2">
                             {% comment %} <input type="text" class="form-control" id="nombre" placeholder="Nombre"/>
