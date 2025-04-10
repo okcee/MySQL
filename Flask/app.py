@@ -53,15 +53,24 @@ def guardar():
         app.logger.info('Formulario válido. Procesando inserción...')
         # 3. Creamos un objeto Cliente con los datos validados del formulario
         cliente_nuevo = Cliente(
+            id=forma.id.data,
             nombre=forma.nombre.data,
             apellido=forma.apellido.data,
             membresia=forma.membresia.data
         )
-        # 4. Usamos el DAO para insertar el nuevo cliente
-        registros_insertados = ClienteDAO.insertar(cliente_nuevo)
-        app.logger.info(f'Cliente insertado: {cliente_nuevo}, Registros afectados: {registros_insertados}')
-        # 5. Redirigimos al usuario a la página de inicio (PRG Pattern)
-        return redirect(url_for('inicio'))
+        if not cliente_nuevo.id:
+            # 4a. Usamos el DAO para insertar el nuevo cliente
+            registros_insertados = ClienteDAO.insertar(cliente_nuevo)
+            app.logger.info(f'Cliente insertado: {cliente_nuevo}, Registros afectados: {registros_insertados}')
+            # 5a. Redirigimos al usuario a la página de inicio (PRG Pattern)
+            return redirect(url_for('inicio')) # Redirige a la página principal después de insertar
+        else:
+            # 4b. Usamos el DAO para insertar el nuevo cliente
+            registros_actualizados = ClienteDAO.actualizar(cliente_nuevo)
+            app.logger.info(f'Cliente actualizado: {cliente_nuevo}, Registros afectados: {registros_actualizados}')
+            # 5b. Redirigimos al usuario a la página de inicio (PRG Pattern)
+            return redirect(url_for('inicio')) # Redirige a la página principal después de actualizar
+        
     else:
         # 6. Si la validación falla:
         app.logger.warning(f'Validación fallida: {forma.errors}')
