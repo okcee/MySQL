@@ -79,7 +79,7 @@ def guardar():
         # Para mostrar errores, harías algo como:
         # clientes_db = ClienteDAO.seleccionar()
         # return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=forma)
-        return redirect(url_for('inicio')) # Redirección simple por ahora
+        return redirect(url_for('inicio')) # Redirección simple al método de inicio
 # --- FIN NUEVA RUTA ---
 
 # --- INICIO RUTA LIMPIAR
@@ -88,6 +88,7 @@ def limpiar():
     app.logger.debug(f'Entrando a /limpiar con método {request.method}')
     return redirect(url_for('inicio'))
 # --- FIN RUTA LIMPIAR
+
 # --- INICIO RUTA MÉTODO EDITAR ---
 @app.route('/editar/<int:id>') # Procesa peticiones localhost:5000/editar/1 --> (nº id)
 def editar(id):
@@ -99,6 +100,16 @@ def editar(id):
     return render_template('index.html', titulo=titulo_app, clientes=clientes_db, forma=cliente_forma)
 # --- FIN RUTA MÉTODO EDITAR ---
 
+# --- INICIO RUTA MÉTODO ELIMINAR ---
+@app.route('/eliminar/<int:id>') # Procesa peticiones localhost:5000/eliminar/1 --> (nº id)
+def eliminar(id):
+    app.logger.debug(f'Entrando a /eliminar/{id} con método {request.method}')
+    cliente = Cliente(id=id)
+    registros_eliminados = ClienteDAO.eliminar(cliente)
+    app.logger.info(f'Cliente eliminado: {cliente}, Registros afectados: {registros_eliminados}')
+    return redirect(url_for('inicio')) # Redirección simple al método de inicio
+
+# --- FIN RUTA MÉTODO ELIMINAR ---
 
 if __name__ == '__main__':
     app.run(debug=True)
