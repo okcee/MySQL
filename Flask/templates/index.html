@@ -23,6 +23,10 @@
                     <!-- # Espacio para el formulario -->
                     <form action="/guardar" method="post" autocomplete="off">
                         {{ forma.csrf_token }}
+                        <!-- Valor de Id (oculto) -->
+                        <!-- Oculto con código HTML manualmente: <input type="hidden" id="id" value=""-->
+                        <!-- Valor de Id (oculto) dinámicamente -->
+                        {{ forma.id }}
                         <!-- Nombre -->
                         <div class="form-floating py-2">
                             <!-- Ejemplo de texto estático -->
